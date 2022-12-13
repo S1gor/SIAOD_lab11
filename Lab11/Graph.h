@@ -26,29 +26,33 @@ public:
 
 void PrintGraph(Graph& graph, int size)
 {
+    cout << "Graph:" << endl;
 	for (int i = 0; i < size; i++)
 	{
 		cout << i << "->";
-
 		for (int v : graph.adj_list[i])
 			cout << v << " ";
 		cout << endl;
 	}
 }
 
-vector<int> bfs(int s, int t, int size, Graph& graph)
+void DistBetwSatellites(int first_satellite, int second_satellite, int size, Graph& graph)
 {
     vector<int> dist(size, size);
     vector<int> p(size, -1);
-    dist[s] = 0;
-    queue<int> q;
-    q.push(s);
+    dist[first_satellite] = 0;
 
-    while (!q.empty()) {
+    queue<int> q;
+    q.push(first_satellite);
+
+    while (!q.empty())
+    {
         int v = q.front();
         q.pop();
-        for (int u : graph.adj_list[v]) {
-            if (dist[u] > dist[v] + 1) {
+        for (int u : graph.adj_list[v])
+        {
+            if (dist[u] > dist[v] + 1)
+            {
                 p[u] = v;
                 dist[u] = dist[v] + 1;
                 q.push(u);
@@ -56,24 +60,19 @@ vector<int> bfs(int s, int t, int size, Graph& graph)
         }
     }
 
-    // если пути не существует, возвращаем пустой vector
-    if (dist[t] == size) {
-        return {};
-    }
+    if (dist[second_satellite] == size)
+        return;
 
     vector<int> path;
-    while (t != -1) {
-        path.push_back(t);
-        t = p[t];
+    while (second_satellite != -1)
+    {
+        path.push_back(second_satellite);
+        second_satellite = p[second_satellite];
     }
 
-    // путь был рассмотрен в обратном порядке, поэтому его нужно перевернуть
     reverse(path.begin(), path.end());
-    return path;
-}
 
-void show_vector(vector<int>& a)
-{
-    for (vector<int>::iterator it = a.begin(); it != a.end(); ++it)
+    cout << "Path: ";
+    for (vector<int>::iterator it = path.begin(); it != path.end(); it++)
         cout << *it;
 }

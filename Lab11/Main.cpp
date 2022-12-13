@@ -18,8 +18,7 @@ int main()
 
 	PrintGraph(graph, size);
 
-	vector<int> a = bfs(2, 3, 6, graph);
-	show_vector(a);
+	DistBetwSatellites(2, 3, size, graph);
 
 	return 0;
 }
