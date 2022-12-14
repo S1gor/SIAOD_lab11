@@ -36,8 +36,21 @@ void PrintGraph(Graph& graph, int size)
 	}
 }
 
-void DistBetwSatellites(int first_satellite, int second_satellite, int size, Graph& graph)
+int ScanSatellite(const char* str, int size)
 {
+    int satellite;
+    cout << "Input " << str << " [0," << size - 1 << "]:";
+    do{
+        cin >> satellite;
+    } while (satellite > size - 1 || satellite < 0);
+    return satellite;
+}
+
+void DistBetwSatellites(Graph& graph, int size)
+{
+    int first_satellite = ScanSatellite("first satellite", size);
+    int second_satellite = ScanSatellite("second satellite", size);
+
     vector<int> dist(size, size);
     vector<int> p(size, -1);
     dist[first_satellite] = 0;
@@ -61,7 +74,10 @@ void DistBetwSatellites(int first_satellite, int second_satellite, int size, Gra
     }
 
     if (dist[second_satellite] == size)
+    {
+        cout << "There is no path!";
         return;
+    }
 
     vector<int> path;
     while (second_satellite != -1)
