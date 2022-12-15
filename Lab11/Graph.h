@@ -92,3 +92,29 @@ void DistBetwSatellites(Graph& graph, int size)
     for (vector<int>::iterator it = path.begin(); it != path.end(); it++)
         cout << *it;
 }
+
+void LoopGraph(Graph& graph, int size)
+{
+    int choose;
+    while (true)
+    {
+        cout << "1 - Print the graph; 2 - The path between two satellites; 3 - Exit.\nChoise:";
+        do {
+            cin >> choose;
+        } while (choose < 1 || choose>3);
+        cout << endl;
+        
+        switch (choose)
+        {
+        case 1:
+            PrintGraph(graph, size);
+            break;
+        case 2:
+            DistBetwSatellites(graph, size);
+            break;
+        case 3:
+            return;
+        }
+        cout << endl;
+    }
+}
