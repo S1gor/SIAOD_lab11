@@ -98,23 +98,27 @@ void LoopGraph(Graph& graph, int size)
     int choose;
     while (true)
     {
-        cout << "1 - Print the graph; 2 - The path between two satellites; 3 - Exit.\nChoise:";
+        cout << "1 - Print the graph; 2 - The path between two satellites; 3 - Clear the console; 4 - Exit.\nChoise:";
         do {
             cin >> choose;
-        } while (choose < 1 || choose>3);
+        } while (choose < 1 || choose>4);
         cout << endl;
         
         switch (choose)
         {
         case 1:
             PrintGraph(graph, size);
+            cout << endl;
             break;
         case 2:
             DistBetwSatellites(graph, size);
+            cout << endl;
             break;
         case 3:
+            system("cls");
+            break;
+        case 4:
             return;
         }
-        cout << endl;
     }
 }
